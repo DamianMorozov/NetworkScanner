@@ -1,8 +1,6 @@
 ﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
-using NetworkScanner.Views;
-
 namespace NetworkScanner.ViewModels;
 
 /// <summary>
@@ -17,7 +15,8 @@ public partial class MainViewModel : BaseViewModel
     /// IP ranges.
     /// </summary>
     public ObservableCollection<IpRangeEntity> IpRanges { get; set; } = new();
-    [ObservableProperty] public ObservableCollection<string> _items;
+    [ObservableProperty]
+    public ObservableCollection<string> items;
 
     /// <summary>
     /// Constructor.
@@ -25,9 +24,9 @@ public partial class MainViewModel : BaseViewModel
     //public MainViewModel(IConnectivity connectivity)
     public MainViewModel()
     {
-        Items = new();
+        items = new();
         //Connectivity = connectivity;
-        Db.FillIpRanges(IpRanges, Items);
+        Db.FillIpRanges(IpRanges, items).ConfigureAwait(true);
     }
 
     #endregion
@@ -55,18 +54,19 @@ public partial class MainViewModel : BaseViewModel
     }
 
     [ICommand]
-    private async Task Delete(string s)
+    private Task Delete(string s)
     {
         if (Items.Contains(s))
         {
             Items.Remove(s);
         }
+        return Task.CompletedTask;
     }
 
     [ICommand]
-    private async Task Tap(string s)
+    private Task Tap(string s)
     {
-        await Shell.Current.GoToAsync($"{nameof(MainViewModel)}?Text={s}");
+        return Shell.Current.GoToAsync($"{nameof(MainViewModel)}?Text={s}");
     }
 
     #endregion

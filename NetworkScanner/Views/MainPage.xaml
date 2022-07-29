@@ -23,13 +23,13 @@
 
                 <StackLayout>
                     <StackLayout VerticalOptions="CenterAndExpand" >
-                        <Label Text="The list of notes is empty."
+                        <Label Text="The list of IP-ranges is empty."
                            Margin="10,25,10,10"
                            FontAttributes="Bold"
                            FontSize="24"
                            HorizontalOptions="Fill"
                            HorizontalTextAlignment="Center" />
-                        <Label Text="Do you want to add a note?"
+                        <Label Text="Do you want to add a IP-range?"
                            FontAttributes="Italic"
                            FontSize="16"
                            HorizontalOptions="Fill"

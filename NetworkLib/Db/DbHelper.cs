@@ -2,6 +2,7 @@
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
 using System.Collections.ObjectModel;
+using SQLite;
 
 namespace NetworkLib.Db;
 
@@ -21,7 +22,8 @@ public class DbHelper
 
     #region Public and private fields, properties, constructor
 
-    //private readonly SQLiteAsyncConnection? _con;
+    private SQLiteAsyncConnection? SqlCon { get; }
+
     /// <summary>
     /// Current IP range.
     /// </summary>
@@ -32,22 +34,22 @@ public class DbHelper
     /// </summary>
     public DbHelper()
     {
-        ////string dataDir = FileSystem.AppDataDirectory;
-        //string? dataDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-        //if (!string.IsNullOrEmpty(dataDir))
-        //{
-        //    string databasePath = Path.Combine(dataDir, "database.db");
-        //    string dbEncryptionKey = SecureStorage.GetAsync("dbKey").Result;
-        //    if (string.IsNullOrEmpty(dbEncryptionKey))
-        //    {
-        //        dbEncryptionKey = new Guid().ToString();
-        //        SecureStorage.SetAsync("dbKey", dbEncryptionKey);
-        //    }
-        //    SQLiteConnectionString dbOptions = new(databasePath, true, key: dbEncryptionKey);
-        //    _con = new(dbOptions);
-        //    _con.CreateTableAsync<IpRangeEntity>();
-        //}
-        //IpRangeCurrent = new();
+        //string dir = FileSystem.AppDataDirectory;
+        string? dir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        if (!string.IsNullOrEmpty(dir))
+        {
+            string databasePath = Path.Combine(dir, "database.db");
+            string dbEncryptionKey = SecureStorage.GetAsync("dbKey").Result;
+            if (string.IsNullOrEmpty(dbEncryptionKey))
+            {
+                dbEncryptionKey = new Guid().ToString();
+                SecureStorage.SetAsync("dbKey", dbEncryptionKey);
+            }
+            SQLiteConnectionString dbOptions = new(databasePath, true, key: dbEncryptionKey);
+            SqlCon = new(dbOptions);
+            SqlCon.CreateTableAsync<IpRangeEntity>();
+        }
+        IpRangeCurrent = new();
     }
 
     #endregion
@@ -59,18 +61,18 @@ public class DbHelper
     /// </summary>
     /// <param name="ipRanges"></param>
     /// <param name="items"></param>
-    public async Task FillIpRanges(ObservableCollection<IpRangeEntity>? ipRanges, ObservableCollection<string>? items)
+    public async Task FillIpRanges(ObservableCollection<IpRangeEntity> ipRanges, ObservableCollection<string> items)
     {
         await Task.Delay(TimeSpan.FromMilliseconds(1)).ConfigureAwait(false);
-        //if (_con == null || ipRanges == null || items == null)
-        //    return;
-        //List<IpRangeEntity>? ranges = await GetIpRanges();
-        //if (ranges != null)
-        //    foreach (IpRangeEntity ipRange in ranges)
-        //    {
-        //        ipRanges.Add(ipRange);
-        //        items.Add(ipRange.Name);
-        //    }
+        if (SqlCon == null)
+            return;
+        List<IpRangeEntity>? ranges = await GetIpRanges();
+        if (ranges != null)
+            foreach (IpRangeEntity ipRange in ranges)
+            {
+                ipRanges.Add(ipRange);
+                items.Add(ipRange.Name);
+            }
     }
 
     /// <summary>
@@ -80,9 +82,9 @@ public class DbHelper
     public async Task<List<IpRangeEntity>?> GetIpRanges()
     {
         await Task.Delay(TimeSpan.FromMilliseconds(1)).ConfigureAwait(false);
-        //if (_con == null)
+        if (SqlCon == null)
             return null;
-        //return await _con.Table<IpRangeEntity>().ToListAsync().ConfigureAwait(true);
+        return await SqlCon.Table<IpRangeEntity>().ToListAsync().ConfigureAwait(true);
     }
 
     /// <summary>
@@ -93,10 +95,10 @@ public class DbHelper
     public async Task<IpRangeEntity?> GetIpRange(int id)
     {
         await Task.Delay(TimeSpan.FromMilliseconds(1)).ConfigureAwait(false);
-        //if (_con == null)
+        if (SqlCon == null)
             return null;
-        //AsyncTableQuery<IpRangeEntity> query = _con.Table<IpRangeEntity>().Where(t => t.Id == id);
-        //return await query.FirstOrDefaultAsync().ConfigureAwait(true);
+        AsyncTableQuery<IpRangeEntity> query = SqlCon.Table<IpRangeEntity>().Where(t => t.Id == id);
+        return await query.FirstOrDefaultAsync().ConfigureAwait(true);
     }
 
     /// <summary>
@@ -107,9 +109,9 @@ public class DbHelper
     public async Task<int> AddIpRange(IpRangeEntity ipRange)
     {
         await Task.Delay(TimeSpan.FromMilliseconds(1)).ConfigureAwait(false);
-        //if (_con == null)
+        if (SqlCon == null)
             return 0;
-        //return await _con.InsertAsync(ipRange).ConfigureAwait(true);
+        return await SqlCon.InsertAsync(ipRange).ConfigureAwait(true);
     }
 
     /// <summary>
@@ -120,9 +122,9 @@ public class DbHelper
     public async Task<int> DeleteIpRange(IpRangeEntity ipRange)
     {
         await Task.Delay(TimeSpan.FromMilliseconds(1)).ConfigureAwait(false);
-        //if (_con == null)
+        if (SqlCon == null)
             return 0;
-        //return await _con.DeleteAsync(ipRange).ConfigureAwait(true);
+        return await SqlCon.DeleteAsync(ipRange).ConfigureAwait(true);
     }
 
     /// <summary>
@@ -133,9 +135,9 @@ public class DbHelper
     public async Task<int> UpdateIpRange(IpRangeEntity ipRange)
     {
         await Task.Delay(TimeSpan.FromMilliseconds(1)).ConfigureAwait(false);
-        //if (_con == null)
+        if (SqlCon == null)
             return 0;
-        //return await _con.UpdateAsync(ipRange).ConfigureAwait(true);
+        return await SqlCon.UpdateAsync(ipRange).ConfigureAwait(true);
     }
 
     #endregion
