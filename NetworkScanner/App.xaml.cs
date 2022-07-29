@@ -1,11 +1,12 @@
-﻿namespace NetworkScanner;
-
-public partial class App : Application
+﻿namespace NetworkScanner
 {
-	public App()
-	{
-		InitializeComponent();
+    public partial class App : Application
+    {
+        public App()
+        {
+            InitializeComponent();
 
-		MainPage = new AppShell();
-	}
+            MainPage = new AppShell();
+        }
+    }
 }

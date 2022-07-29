@@ -3,7 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
-    <Version>0.1.100.0</Version>
+    <Version>0.1.110.0</Version>
     <PlatformTarget>AnyCPU</PlatformTarget>
 	<Nullable>enable</Nullable>
 	<LangVersion>10.0</LangVersion>

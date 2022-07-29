@@ -1,9 +1,10 @@
-﻿namespace NetworkScanner;
-
-public partial class AppShell : Shell
+﻿namespace NetworkScanner
 {
-	public AppShell()
-	{
-		InitializeComponent();
-	}
+    public partial class AppShell : Shell
+    {
+        public AppShell()
+        {
+            InitializeComponent();
+        }
+    }
 }

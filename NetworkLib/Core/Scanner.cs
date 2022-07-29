@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using NetworkLib.Core.Helpers;
 using NetworkLib.Core.Objects;
+using System.Collections.Generic;
 
 namespace NetworkLib.Core;
 
