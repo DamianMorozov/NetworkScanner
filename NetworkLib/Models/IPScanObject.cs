@@ -3,7 +3,7 @@
 
 using System.Net;
 
-namespace NetworkLib.Core.Objects;
+namespace NetworkLib.Models;
 
 /// <summary>
 /// IP scan object.

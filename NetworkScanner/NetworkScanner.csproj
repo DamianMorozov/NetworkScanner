@@ -46,7 +46,7 @@
 	  <ProjectReference Include="..\NetworkLib\NetworkLib.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Models\Db\" />
+	  <Folder Include="Models\" />
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="Views\" />
 	</ItemGroup>

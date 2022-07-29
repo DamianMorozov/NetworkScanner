@@ -2,7 +2,7 @@
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
 using NetworkLib.Core;
-using NetworkLib.Core.Objects;
+using NetworkLib.Models;
 
 namespace NetworkLibTests
 {

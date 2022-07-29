@@ -4,7 +4,7 @@
 using System.Net;
 using System.Net.NetworkInformation;
 
-namespace NetworkLib.Core.Helpers;
+namespace NetworkLib.Helpers;
 
 /// <summary>
 /// ARP request.

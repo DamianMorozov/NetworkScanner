@@ -1,16 +1,14 @@
 // This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
-using System.Net;
-using System.Net.Sockets;
-using System.Net.NetworkInformation;
-using System.Text.RegularExpressions;
 using System.Diagnostics;
-using NetworkLib.Core.Helpers;
-using NetworkLib.Core.Objects;
-using System.Collections.Generic;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
+using System.Text.RegularExpressions;
+using NetworkLib.Helpers;
 
-namespace NetworkLib.Core;
+namespace NetworkLib.Models;
 
 /// <summary>
 /// Scanner.
