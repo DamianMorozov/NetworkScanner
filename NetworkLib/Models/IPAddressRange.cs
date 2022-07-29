@@ -6,17 +6,6 @@ using System.Collections;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using NetworkLib.Helpers;
-/* Unmerged change from project 'NetworkLib (net6.0-windows10.0.19041.0)'
-Before:
-using NetworkLib.Core.Helpers;
-
-namespace NetworkLib.Core.Objects;
-After:
-using NetworkLib.Core.Helpers;
-using NetworkLib;
-using NetworkLib.Core;
-using NetworkLib.Core.Objects;
-*/
 
 namespace NetworkLib.Models;
 

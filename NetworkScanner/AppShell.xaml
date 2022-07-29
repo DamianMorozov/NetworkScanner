@@ -4,11 +4,67 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:NetworkScanner"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:views="clr-namespace:NetworkScanner.Views"
+    Shell.FlyoutBehavior="Disabled"
+    FlyoutBackgroundColor="{StaticResource Black}"
+    FlyoutWidth="68"
+    FlyoutBehavior="{OnIdiom Phone=Disabled, Default=Locked}">
+
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <Grid RowDefinitions="68">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Grid.GestureRecognizers>
+                <Image Source="settings_48dp.png"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       WidthRequest="40"
+                       HeightRequest="40"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
+
+    <!-- Desktop -->
+    <FlyoutItem Title="Home" FlyoutIcon="addlist_48dp.png">
+        <ShellContent ContentTemplate="{DataTemplate views:MainPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Tags" FlyoutIcon="tags_48dp.png">
+        <ShellContent ContentTemplate="{DataTemplate views:TagsPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Settings" FlyoutIcon="settings_48dp.png" FlyoutItemIsVisible="False">
+        <ShellContent ContentTemplate="{DataTemplate views:SettingsPage}"/>
+    </FlyoutItem>
+
+    <!-- Phone -->
+    <TabBar x:Name="PhoneTabs">
+        <Tab Title="Home" Icon="addlist_48dp.png">
+            <ShellContent ContentTemplate="{DataTemplate views:MainPage}"/>
+        </Tab>
+        <Tab Title="Tags" Icon="tags_48dp.png">
+            <ShellContent ContentTemplate="{DataTemplate views:TagsPage}"/>
+        </Tab>
+        <Tab Title="Settings" Icon="settings_48dp.png">
+            <ShellContent ContentTemplate="{DataTemplate views:SettingsPage}"/>
+        </Tab>
+    </TabBar>
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
+        ContentTemplate="{DataTemplate views:MainPage}"
         Route="MainPage" />
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid WidthRequest="44" HeightRequest="68"
+                  ColumnDefinitions="44" RowDefinitions="68">
+                <Image Source="{Binding FlyoutIcon}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"                               
+                       HeightRequest="38"
+                       WidthRequest="38"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
 
 </Shell>

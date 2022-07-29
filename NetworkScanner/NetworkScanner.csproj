@@ -46,9 +46,7 @@
 	  <ProjectReference Include="..\NetworkLib\NetworkLib.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Models\" />
 	  <Folder Include="ViewModels\" />
-	  <Folder Include="Views\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="7.1.2" />
